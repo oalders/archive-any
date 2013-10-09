@@ -1,34 +1,21 @@
----
-name: Archive-Any
-version: 0.092
-author:
-  - 'Clint Moore E<lt>cmoore@cpan.orgE<gt>'
-abstract: Single interface to deal with file archives.
-license: perl
-resources:
-  license: http://dev.perl.org/licenses/
-requires:
-  Archive::Tar: 0.22
-  Archive::Zip: 1.07
-  Cwd: 0
-  File::MMagic: 1.27
-  File::Spec::Functions: 0
-  MIME::Types: 1.16
-  Module::Find: 0.05
-  Test::More: 0.4
-  Test::Warn: 0
-provides:
-  Archive::Any:
-    file: lib/Archive/Any.pm
-    version: 0.092
-  Archive::Any::Plugin:
-    file: lib/Archive/Any/Plugin.pm
-  Archive::Any::Plugin::Tar:
-    file: lib/Archive/Any/Plugin/Tar.pm
-  Archive::Any::Plugin::Zip:
-    file: lib/Archive/Any/Plugin/Zip.pm
-    version: 0.03
-generated_by: Module::Build version 0.2805
+--- #YAML:1.0
+name:                Archive-Any
+version:             0.093
+abstract:            ~
+license:             unknown
+generated_by:        ExtUtils::MakeMaker version 6.30_03
+author:              ~
+distribution_type:   module
+requires:     
+    Archive::Tar:                  0.22
+    Archive::Zip:                  1.07
+    Cwd:                           0
+    File::MMagic:                  1.27
+    File::Spec::Functions:         0
+    MIME::Types:                   1.16
+    Module::Find:                  0.05
+    Test::More:                    0.4
+    Test::Warn:                    0
 meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
-  version: 1.2
+    url: http://module-build.sourceforge.net/META-spec-new.html
+    version: 1.1

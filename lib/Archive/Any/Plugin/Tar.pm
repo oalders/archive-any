@@ -33,7 +33,7 @@ sub extract {
     my ( $self, $file ) = @_;
 
     my $t = Archive::Tar->new( $file );
-	return $t->extract;
+    return $t->extract;
 }
 
 sub type {

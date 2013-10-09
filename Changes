@@ -1,14 +1,19 @@
+0.93
+    - DESTROY ALL TABS! [schwern]
+    - The example for Plugin->can_handle showed the wrong return value.
+      [schwern]
+
 0.92  Sat Aug 26 17:09:21 PDT 2006
-	- Added pod tests and a README for kwalitee.  Not exactly a critical
-	update!
+    - Added pod tests and a README for kwalitee.  Not exactly a critical
+      update!
 
 0.91  Mon Aug 14 10:35:24 PDT 2006
-	- type() is there now.  I'm not in the business of breaking other
-	people's scripts.
-	- Fixed several issues with the pod.
-	- type() is going AWAY AWAY AWAY - use mime_type instead.  It
-	actually has useful information.
-	- Added a test for the backwardsness.
+    - type() is there now.  I'm not in the business of breaking other
+      people's scripts.
+    - Fixed several issues with the pod.
+    - type() is going AWAY AWAY AWAY - use mime_type instead.  It
+      actually has useful information.
+    - Added a test for the backwardsness.
 
 0.09  Sun Aug 13 23:25:13 PDT 2006
     - Complete rework of the module.

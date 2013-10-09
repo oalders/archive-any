@@ -9,62 +9,62 @@ my %tests = (
   't/lib.zip' => {
       impolite=> 0,
       naughty => 0,
-      handler  => 'Archive::Any::Plugin::Zip',
-		type => 'zip',
-      files => [qw(
-		lib/
-		lib/Archive/
-		lib/Archive/Any.pm
-		lib/Archive/Any/
-		lib/Archive/Any/Tar.pm
-		lib/Archive/Any/Zip.pm
-		lib/Archive/Any/Zip.pm~
-		lib/Archive/Any/Tar.pm~
-		lib/Archive/Any.pm~
-		)],
+      handler => 'Archive::Any::Plugin::Zip',
+      type    => 'zip',
+      files   => [qw(
+        lib/
+        lib/Archive/
+        lib/Archive/Any.pm
+        lib/Archive/Any/
+        lib/Archive/Any/Tar.pm
+        lib/Archive/Any/Zip.pm
+        lib/Archive/Any/Zip.pm~
+        lib/Archive/Any/Tar.pm~
+        lib/Archive/Any.pm~
+        )],
   },
   't/lib.tgz' => {
       impolite  => 0,
       naughty   => 0,
-      handler      => 'Archive::Any::Plugin::Tar',
-		type => 'tar',
+      handler   => 'Archive::Any::Plugin::Tar',
+        type    => 'tar',
       files     => [qw( 
-		lib/
-		lib/Archive/
-		lib/Archive/Any.pm
-		lib/Archive/Any/
-		lib/Archive/Any/Tar.pm
-		lib/Archive/Any/Zip.pm
-		lib/Archive/Any/Zip.pm~
-		lib/Archive/Any/Tar.pm~
-		lib/Archive/Any.pm~
+        lib/
+        lib/Archive/
+        lib/Archive/Any.pm
+        lib/Archive/Any/
+        lib/Archive/Any/Tar.pm
+        lib/Archive/Any/Zip.pm
+        lib/Archive/Any/Zip.pm~
+        lib/Archive/Any/Tar.pm~
+        lib/Archive/Any.pm~
                       )],
   },
   't/impolite.tar.gz' => {
       impolite  => 1,
       naughty   => 0,
-      handler      => 'Archive::Any::Plugin::Tar',
-		type => 'tar',
+      handler   => 'Archive::Any::Plugin::Tar',
+      type      => 'tar',
       files     => [qw(
-		type.t
-		Any.t
-		00compile.t
-		fail.t
-	)],
+        type.t
+        Any.t
+        00compile.t
+        fail.t
+    )],
   },
   't/naughty.tar' => {
       impolite  => 0,
       naughty   => 1,
-      handler	=> 'Archive::Any::Plugin::Tar',
-		type => 'tar',
+      handler   => 'Archive::Any::Plugin::Tar',
+      type      => 'tar',
       files     => [qw(
-		/tmp/lib/
-		/tmp/lib/Archive/
-		/tmp/lib/Archive/Any/
-		/tmp/lib/Archive/Any/Tar.pm
-		/tmp/lib/Archive/Any/Zip.pm
-		/tmp/lib/Archive/Any.pm
-		)],
+        /tmp/lib/
+        /tmp/lib/Archive/
+        /tmp/lib/Archive/Any/
+        /tmp/lib/Archive/Any/Tar.pm
+        /tmp/lib/Archive/Any/Zip.pm
+        /tmp/lib/Archive/Any.pm
+        )],
   },
 );
 

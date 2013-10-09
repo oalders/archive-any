@@ -29,11 +29,11 @@ Archive::Any requires that your plugin define three methods, all of which are pa
 This returns an array of mime types that the plugin can handle.
 
  sub can_handle {
-    return( [
-             'application/x-tar',
-             'application/x-gtar',
-             'application/x-gzip',
-             ] );
+    return(
+           'application/x-tar',
+           'application/x-gtar',
+           'application/x-gzip',
+          );
  }
 
 =item B<files>
