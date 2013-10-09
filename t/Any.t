@@ -90,6 +90,7 @@ sub test_archive {
 
     ok( eq_set([$archive->files], $expect->{files}),
                                      '  lists the right files' );
+    ok( $archive->type(), "backwards compatibility" );
 
 #    is( $archive->handler, $expect->{handler},    '  right handler' );
 

@@ -1,3 +1,11 @@
+0.91  Mon Aug 14 10:35:24 PDT 2006
+	- type() is there now.  I'm not in the business of breaking other
+	people's scripts.
+	- Fixed several issues with the pod.
+	- type() is going AWAY AWAY AWAY - use mime_type instead.  It
+	actually has useful information.
+	- Added a test for the backwardsness.
+
 0.09  Sun Aug 13 23:25:13 PDT 2006
     - Complete rework of the module.
     - Supports simple plugins for adding support for archive formats.

@@ -49,10 +49,11 @@ sub extract {
     return 1;
 }
 
+sub type {
+    my $self = shift;
+    return 'zip';
+}
 
-=head1 AUTHOR
-
-Michael G Schwern E<lt>schwern@pobox.comE<gt>
 
 =head1 SEE ALSO
 

@@ -20,7 +20,7 @@ Archive::Any requires that your plugin define three methods, all of which are pa
 
 =over 4
 
-=item Subclass Archive::Any::Plugin
+=item B<Subclass Archive::Any::Plugin>
 
  use base 'Archive::Any::Plugin';
 
@@ -43,18 +43,18 @@ Return a list of items inside the archive.
  sub files {
     my( $self, $file ) = @_;
     my $t = Archive::Tar->new( $file );
-    $t->list_files;
+    return $t->list_files;
  }
 
 =item B<extract>
 
-This method should extract the contents of $file to the current directory.
+This method should extract the contents of $file to the current directory.  L<Archive::Any::Plugin> handles negotiating directories for you.
 
  sub extract {
     my ( $self, $file ) = @_;
  
     my $t = Archive::Tar->new( $file );
-   	return $t->extract;
+    return $t->extract;
  }
 
 =back

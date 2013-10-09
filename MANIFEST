@@ -16,6 +16,4 @@ t/lib.zip
 t/naughty.hominawoof
 t/naughty.tar
 t/not_a_zip.zip
-t/pod-coverage.t
-t/pod.t
 t/type.t

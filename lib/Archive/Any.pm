@@ -44,11 +44,11 @@ Extracts the files in the archive to the given $directory.  If no $directory is 
 
 A list of files in the archive.
 
-=item B<type>
+=item B<mime_type>
 
-  my $type = $archive->type;
+ my $mime_type = $archive->mime_type();
 
-Returns the type of archive this is.
+Returns the mime type of the archive.
 
 =item B<is_impolite>
 
@@ -64,6 +64,18 @@ Checks to see if this archive is going to unpack B<outside> the current director
 
 =back
 
+=head1 DEPRECATED
+
+=over 4
+
+=item B<type>
+
+  my $type = $archive->type;
+
+Returns the type of archive.  This method is provided for backwards compatibility in the Tar and Zip plugins and will be going away B<soon> in favor of C<mime_type>.
+
+=back
+
 =head1 PLUGINS
 
 For detailed information on writing plugins to work with Archive::Any, please see the pod documentation for L<Archive::Any::Plugin>.
@@ -76,19 +88,15 @@ Clint Moore E<lt>cmoore@cpan.orgE<gt>
 
 Michael G Schwern
 
-=head1 BUGS
+=head1 SEE ALSO
 
-Please report any bugs or feature requests to
-C<bug-test-thingy at rt.cpan.org>, or through the web interface at
-L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Archive-Any>.
-I will be notified, and then you'll automatically be notified of progress on
-your bug as I make changes.
+Archive::Any::Plugin
 
 =head1 SUPPORT
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc Archive::Any
+ perldoc Archive::Any
 
 You can also look for information at:
 
@@ -112,12 +120,6 @@ L<http://search.cpan.org/dist/Archive-Any>
 
 =back
 
-=head1 DEDICATION
-
-This release is dedicated to T-Bone (Tom Stankus) for his work on the song "Exostential Blues".
-
-L<http://lyricsplayground.com/alpha/songs/e/existentialblues.shtml>
-
 =head1 LICENSE
 
 This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
@@ -131,7 +133,7 @@ use strict;
 use warnings;
 
 use vars qw($VERSION);
-$VERSION = 0.09;
+$VERSION = 0.091;
 
 use Archive::Any::Plugin;
 use File::Spec::Functions qw( rel2abs splitdir );
@@ -181,6 +183,7 @@ sub new {
     return bless {
         file    => $file,
         handler => $handler,
+        type => $mime_type,
     }, $class;
 }
 
@@ -213,9 +216,18 @@ sub is_naughty {
     return ( grep { m{^(?:/|(?:\./)*\.\./)} } $self->files ) ? 1 : 0;
 }
 
-#sub handler {
-#    my $self = shift;
-#    return $self->{handler};
-#}
+sub mime_type {
+    my $self = shift;
+    return $self->{mime_type};
+}
+
+#
+# This is not really here.  You are not seeing this.
+#
+sub type {
+    my $self = shift;
+    return $self->{handler}->type();
+}
+# End of what you are not seeing.
 
 1;
