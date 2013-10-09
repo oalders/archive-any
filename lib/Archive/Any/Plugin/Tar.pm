@@ -20,6 +20,7 @@ sub can_handle {
            'application/x-tar',
            'application/x-gtar',
            'application/x-gzip',
+           'application/x-bzip2',
           );
 }
 
