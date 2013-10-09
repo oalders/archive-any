@@ -85,8 +85,8 @@ while( my($file, $expect) = each %tests ) {
 
     is( $archive->type, $expect->{type},    '  right type' );
 
-    is( !!$archive->is_impolite, !!$expect->{impolite},  "  impolite?" );
-    is( !!$archive->is_naughty,  !!$expect->{naughty},   "  naughty?" );
+    is( $archive->is_impolite, $expect->{impolite},  "  impolite?" );
+    is( $archive->is_naughty,  $expect->{naughty},   "  naughty?" );
 
     unless( $archive->is_impolite || $archive->is_naughty ) {
         ok($archive->extract(),   "extract($file)");

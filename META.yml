@@ -1,0 +1,16 @@
+# http://module-build.sourceforge.net/META-spec.html
+#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
+name:         Archive-Any
+version:      0.04
+version_from: lib/Archive/Any.pm
+installdirs:  site
+requires:
+    Archive::Tar:                  0.22
+    Archive::Zip:                  1.06
+    Class::Virtually::Abstract:    0.02
+    Cwd:                           0
+    File::Spec::Functions:         0
+    Test::More:                    0.11
+
+distribution_type: module
+generated_by: ExtUtils::MakeMaker version 6.18

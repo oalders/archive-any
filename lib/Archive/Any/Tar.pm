@@ -2,7 +2,7 @@ package Archive::Any::Tar;
 
 use strict;
 use vars qw($VERSION @ISA);
-$VERSION = 0.01;
+$VERSION = 0.02;
 
 require Archive::Any;
 @ISA = qw(Archive::Any);
@@ -34,6 +34,8 @@ sub new {
     my $self = bless {}, $class;
 
     $self->{handler} = Archive::Tar->new($file);
+    return unless $self->{handler};
+
     $self->{file}    = $file;
 
     return $self;
@@ -43,7 +45,7 @@ sub new {
 sub files {
     my($self) = shift;
 
-    $self->{handler}->list_archive($self->{file});
+    $self->{handler}->list_files;
 }
 
 
@@ -56,7 +58,7 @@ sub extract {
         chdir $dir;
     }
 
-    my $success = $self->{handler}->extract_archive($self->{file});
+    my $success = $self->{handler}->extract;
 
     if( $dir) {
         chdir $orig_dir;

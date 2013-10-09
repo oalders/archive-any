@@ -1,11 +1,15 @@
-MANIFEST
-Makefile.PL
+Changes
 lib/Archive/Any.pm
 lib/Archive/Any/Tar.pm
 lib/Archive/Any/Zip.pm
+Makefile.PL
+MANIFEST
 t/00compile.t
 t/Acme-POE-Knee-1.10.zip
 t/Any.t
+t/fail.t
+t/im_not_really_a.zip
 t/LoadHtml.5_0.tar.gz
 t/naughty.tar.gz
 t/your-0.01.tar.gz
+META.yml                                 Module meta-data (added by MakeMaker)

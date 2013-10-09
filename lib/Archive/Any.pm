@@ -3,7 +3,7 @@ package Archive::Any;
 use strict;
 use vars qw($VERSION @ISA);
 
-$VERSION = 0.03;
+$VERSION = 0.04;
 
 require Class::Virtually::Abstract;
 @ISA = qw(Class::Virtually::Abstract);
@@ -11,7 +11,7 @@ require Class::Virtually::Abstract;
 __PACKAGE__->virtual_methods(qw(files extract type));
 
 
-use File::Spec::Functions qw(rel2abs);
+use File::Spec::Functions qw(rel2abs splitpath splitdir);
 
 
 =head1 NAME
@@ -118,10 +118,11 @@ sub is_impolite {
     my($self) = shift;
 
     my @files = $self->files;
-    my $first_dir = shift @files;
+    my $first_file = $files[0];
+    my($first_dir) = splitdir($first_file);
 
-    return scalar grep !/^\Q$first_dir\E/, @files;
-}       
+    return grep(!/^\Q$first_dir\E/, @files) ? 1 : 0;
+}
 
 =item B<is_naughty>
 
@@ -135,7 +136,7 @@ current directory.
 sub is_naughty {
     my($self) = shift;
 
-    return scalar grep { m{^(?:/|\.\./)} } $self->files;
+    return (grep { m{^(?:/|(?:\./)*\.\./)} } $self->files) ? 1 : 0;
 }
 
 =back

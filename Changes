@@ -1,0 +1,19 @@
+0.04  Mon Oct 20 01:53:27 PDT 2003
+    * Removing unzip binary hack around Archive::Zip->extractMember bug.
+    - Working around new extractTree() bug which can cause directories to
+      be unzipped with permissions set to 0000.
+    - Fixing is_impolite() and is_naughty() so they return true or false
+      instead of the scalar result of a grep.
+    - Failing gracefully should Archive::Tar/Zip->new() fail.
+    * Fixing list_archive() and extract_archive() misuse so we work with 
+      modern Archive::Tar.
+    - Class::Virtually::Abstract now has a version # on CPAN.
+    * is_naughty() would screw up if the first file in the archive wasn't
+      a lone directory
+
+0.03  Mon Sep  3 22:18:28 EDT 2001
+    * It is now safe to chdir() after creating an Archive::Any object
+
+0.01  Sun Aug 26 02:09:51 EDT 2001
+    * First working version
+    * Archive::Zip is broken.  Using unzip binary to extract.
