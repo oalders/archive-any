@@ -1,3 +1,9 @@
+0.06  Wed Oct 29 14:39:15 PST 2003
+    - Updating to Archive::Zip 1.07 which fixes extractTree().
+    * Forgot to include *.tar in the "what is a tarball" logic!
+      [Thanks Kevin Pease]
+    - Minor doc improvements.
+
 0.05  Mon Oct 20 04:28:31 PDT 2003
     * Archive::Any->new($file, $type) wasn't working (thanks to Simon Wistow
       for catching this).

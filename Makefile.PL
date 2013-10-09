@@ -27,7 +27,7 @@ WriteMakefile(
     NAME            => $PACKAGE,
     VERSION_FROM    => "lib/$PACKAGE_FILE.pm", # finds $VERSION
     PREREQ_PM       => { Archive::Tar   => 0.22,
-                         Archive::Zip   => 1.06,
+                         Archive::Zip   => 1.07,
                          Cwd            => 0,
                          Class::Virtually::Abstract => 0.02,
                          File::Spec::Functions => 0,

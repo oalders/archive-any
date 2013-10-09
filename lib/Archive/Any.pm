@@ -3,7 +3,7 @@ package Archive::Any;
 use strict;
 use vars qw($VERSION @ISA);
 
-$VERSION = 0.05;
+$VERSION = 0.06;
 
 require Class::Virtually::Abstract;
 @ISA = qw(Class::Virtually::Abstract);
@@ -67,7 +67,7 @@ sub new {
 
     unless( defined $type ) {
         # Needs to be replaced with some sort of File::Type
-        if( $file =~ /\.(?:tar.gz|tgz)$/i ) {
+        if( $file =~ /\.(?:tar.gz|tgz|tar)$/i ) {
             $type = 'tar';
         }
         elsif( $file =~ /\.zip$/i ) {
@@ -97,21 +97,21 @@ sub new {
 
   my @file = $archive->files;
 
-Filess the file in the archive.
+A list of files in the archive.
 
 =item B<extract>
 
   $archive->extract;
-  $archive->extract($dir);
+  $archive->extract($director);
 
-Extracts the files in the archive to the given directory.  If no
-directory is given, it will go into the current working directory.
+Extracts the files in the archive to the given $directory.  If no
+$directory is given, it will go into the current working directory.
 
 =item B<type>
 
   my $type = $archive->type;
 
-Returns the type of archive this is.  'zip' or 'tar'.
+Returns the type of archive this is.  Currently 'zip' or 'tar'.
 
 =item B<is_impolite>
 

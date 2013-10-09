@@ -2,7 +2,7 @@ package Archive::Any::Zip;
 
 use strict;
 use vars qw($VERSION @ISA);
-$VERSION = 0.02;
+$VERSION = 0.03;
 
 require Archive::Any;
 @ISA = qw(Archive::Any);
@@ -59,20 +59,13 @@ sub extract {
         chdir $dir;
     }
 
-# extractTree() at 1.06 will sometimes create directories set 0000 so it
-# can't even unpack the archive. :(
-#    $self->{handler}->extractTree;
-    my $success = 1;
-    foreach my $file ($self->files) {
-        $success = $self->{handler}->extractMember($file) == AZ_OK;
-        last unless $success;
-    }
+    $self->{handler}->extractTree;
 
     if( $dir) {
         chdir $orig_dir;
     }
 
-    return $success;
+    return 1;
 }
 
 
