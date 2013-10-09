@@ -133,7 +133,7 @@ use strict;
 use warnings;
 
 use vars qw($VERSION);
-$VERSION = 0.091;
+$VERSION = 0.092;
 
 use Archive::Any::Plugin;
 use File::Spec::Functions qw( rel2abs splitdir );

@@ -17,3 +17,7 @@ t/naughty.hominawoof
 t/naughty.tar
 t/not_a_zip.zip
 t/type.t
+t/pod.t
+t/pod-coverage.t
+Build.PL
+README

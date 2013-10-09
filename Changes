@@ -1,3 +1,7 @@
+0.92  Sat Aug 26 17:09:21 PDT 2006
+	- Added pod tests and a README for kwalitee.  Not exactly a critical
+	update!
+
 0.91  Mon Aug 14 10:35:24 PDT 2006
 	- type() is there now.  I'm not in the business of breaking other
 	people's scripts.
