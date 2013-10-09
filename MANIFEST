@@ -1,0 +1,11 @@
+MANIFEST
+Makefile.PL
+lib/Archive/Any.pm
+lib/Archive/Any/Tar.pm
+lib/Archive/Any/Zip.pm
+t/00compile.t
+t/Acme-POE-Knee-1.10.zip
+t/Any.t
+t/LoadHtml.5_0.tar.gz
+t/naughty.tar.gz
+t/your-0.01.tar.gz
