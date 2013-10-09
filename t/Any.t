@@ -71,7 +71,16 @@ my %tests = (
 
 
 while( my($file, $expect) = each %tests ) {
-    my $archive = Archive::Any->new($file);
+    # Test it once with type auto-discover and once with the type
+    # forced.  Forced typing was broken until 0.05.
+    test_archive($file, $expect);
+    test_archive($file, $expect, $expect->{type});
+}
+
+sub test_archive {
+    my($file, $expect, $type) = @_;
+
+    my $archive = Archive::Any->new($file, $type);
 
     # And now we chdir out from under it.  This causes serious problems
     # if we're not careful to use absolute paths internally.

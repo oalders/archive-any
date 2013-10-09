@@ -1,3 +1,7 @@
+0.05  Mon Oct 20 04:28:31 PDT 2003
+    * Archive::Any->new($file, $type) wasn't working (thanks to Simon Wistow
+      for catching this).
+
 0.04  Mon Oct 20 01:53:27 PDT 2003
     * Removing unzip binary hack around Archive::Zip->extractMember bug.
     - Working around new extractTree() bug which can cause directories to

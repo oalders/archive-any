@@ -3,7 +3,7 @@ package Archive::Any;
 use strict;
 use vars qw($VERSION @ISA);
 
-$VERSION = 0.04;
+$VERSION = 0.05;
 
 require Class::Virtually::Abstract;
 @ISA = qw(Class::Virtually::Abstract);
@@ -49,32 +49,40 @@ Currently only supports unpacking.
   my $archive = Archive::Any->new($archive_file);
   my $archive = Archive::Any->new($archive_file, $type);
 
-Start working on the given file.
+Creates an Archive::Any object representing $file, but don't do anything
+with it yet.
 
 $type is optional.  It lets you force the file type in-case
-Archive::Any can't figure it out.  'tar' or 'zip'.
+Archive::Any can't figure it out.  'tar' or 'zip' is currently
+accepted.
 
 =cut
 
+my %Type2Class = ( tar => 'Archive::Any::Tar',
+                   zip => 'Archive::Any::Zip'
+                 );
+
 sub new {
     my($proto, $file, $type) = @_;
-
-    my $class;
 
     unless( defined $type ) {
         # Needs to be replaced with some sort of File::Type
         if( $file =~ /\.(?:tar.gz|tgz)$/i ) {
             $type = 'tar';
-            $class = 'Archive::Any::Tar';
         }
         elsif( $file =~ /\.zip$/i ) {
             $type = 'zip';
-            $class = 'Archive::Any::Zip';
         }
         else {
             warn "Archive::Any can't figure out what type '$file' is.\n";
             return;
         }
+    }
+
+    my $class = $Type2Class{$type};
+    unless( $class ) {
+        warn "Archive::Any can't handle $type.\n";
+        return;
     }
 
     $file = rel2abs( $file );
