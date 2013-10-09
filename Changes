@@ -1,3 +1,7 @@
+0.09  Sun Aug 13 23:25:13 PDT 2006
+    - Complete rework of the module.
+    - Supports simple plugins for adding support for archive formats.
+
 0.06  Wed Oct 29 14:39:15 PST 2003
     - Updating to Archive::Zip 1.07 which fixes extractTree().
     * Forgot to include *.tar in the "what is a tarball" logic!

@@ -1,22 +1,7 @@
-package Archive::Any;
-
-use strict;
-use vars qw($VERSION @ISA);
-
-$VERSION = 0.06;
-
-require Class::Virtually::Abstract;
-@ISA = qw(Class::Virtually::Abstract);
-
-__PACKAGE__->virtual_methods(qw(files extract type));
-
-
-use File::Spec::Functions qw(rel2abs splitpath splitdir);
-
 
 =head1 NAME
 
-Archive::Any - Single interface to deal with zips and tarballs
+Archive::Any - Single interface to deal with file archives.
 
 =head1 SYNOPSIS
 
@@ -35,12 +20,7 @@ Archive::Any - Single interface to deal with zips and tarballs
 
 =head1 DESCRIPTION
 
-This module is a single interface for manipulating different archive
-formats.  Tarballs, zip files, etc...
-
-Currently only tar (with or without gzip) and zip are supported.
-
-Currently only supports unpacking.
+This module is a single interface for manipulating different archive formats.  Tarballs, zip files, etc.
 
 =over 4
 
@@ -49,49 +29,14 @@ Currently only supports unpacking.
   my $archive = Archive::Any->new($archive_file);
   my $archive = Archive::Any->new($archive_file, $type);
 
-Creates an Archive::Any object representing $file, but don't do anything
-with it yet.
+$type is optional.  It lets you force the file type in-case Archive::Any can't figure it out.
 
-$type is optional.  It lets you force the file type in-case
-Archive::Any can't figure it out.  'tar' or 'zip' is currently
-accepted.
+=item B<extract>
 
-=cut
+  $archive->extract;
+  $archive->extract($directory);
 
-my %Type2Class = ( tar => 'Archive::Any::Tar',
-                   zip => 'Archive::Any::Zip'
-                 );
-
-sub new {
-    my($proto, $file, $type) = @_;
-
-    unless( defined $type ) {
-        # Needs to be replaced with some sort of File::Type
-        if( $file =~ /\.(?:tar.gz|tgz|tar)$/i ) {
-            $type = 'tar';
-        }
-        elsif( $file =~ /\.zip$/i ) {
-            $type = 'zip';
-        }
-        else {
-            warn "Archive::Any can't figure out what type '$file' is.\n";
-            return;
-        }
-    }
-
-    my $class = $Type2Class{$type};
-    unless( $class ) {
-        warn "Archive::Any can't handle $type.\n";
-        return;
-    }
-
-    $file = rel2abs( $file );
-
-    eval qq{require $class} or die $@;
-    my $self = $class->new($file);
-
-    return $self;
-}
+Extracts the files in the archive to the given $directory.  If no $directory is given, it will go into the current working directory.
 
 =item B<files>
 
@@ -99,61 +44,178 @@ sub new {
 
 A list of files in the archive.
 
-=item B<extract>
-
-  $archive->extract;
-  $archive->extract($director);
-
-Extracts the files in the archive to the given $directory.  If no
-$directory is given, it will go into the current working directory.
-
 =item B<type>
 
   my $type = $archive->type;
 
-Returns the type of archive this is.  Currently 'zip' or 'tar'.
+Returns the type of archive this is.
 
 =item B<is_impolite>
 
   my $is_impolite = $archive->is_impolite;
 
-Checks to see if this archive is going to unpack into the current
-directory rather than create it's own.
-
-=cut
-
-sub is_impolite {
-    my($self) = shift;
-
-    my @files = $self->files;
-    my $first_file = $files[0];
-    my($first_dir) = splitdir($first_file);
-
-    return grep(!/^\Q$first_dir\E/, @files) ? 1 : 0;
-}
+Checks to see if this archive is going to unpack into the current directory rather than create its own.
 
 =item B<is_naughty>
 
   my $is_naughty = $archive->is_naughty;
 
-Checks to see if this archive is going to unpack B<outside> the
-current directory.
-
-=cut
-
-sub is_naughty {
-    my($self) = shift;
-
-    return (grep { m{^(?:/|(?:\./)*\.\./)} } $self->files) ? 1 : 0;
-}
+Checks to see if this archive is going to unpack B<outside> the current directory.
 
 =back
 
+=head1 PLUGINS
+
+For detailed information on writing plugins to work with Archive::Any, please see the pod documentation for L<Archive::Any::Plugin>.
 
 =head1 AUTHOR
 
-Michael G Schwern E<lt>schwern@pobox.comE<gt>
+Clint Moore E<lt>cmoore@cpan.orgE<gt>
+
+=head1 AUTHOR EMERITUS
+
+Michael G Schwern
+
+=head1 BUGS
+
+Please report any bugs or feature requests to
+C<bug-test-thingy at rt.cpan.org>, or through the web interface at
+L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Archive-Any>.
+I will be notified, and then you'll automatically be notified of progress on
+your bug as I make changes.
+
+=head1 SUPPORT
+
+You can find documentation for this module with the perldoc command.
+
+    perldoc Archive::Any
+
+You can also look for information at:
+
+=over 4
+
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/Archive-Any>
+
+=item * CPAN Ratings
+
+L<http://cpanratings.perl.org/d/Archive-Any>
+
+=item * RT: CPAN's request tracker
+
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Archive-Any>
+
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/Archive-Any>
+
+=back
+
+=head1 DEDICATION
+
+This release is dedicated to T-Bone (Tom Stankus) for his work on the song "Exostential Blues".
+
+L<http://lyricsplayground.com/alpha/songs/e/existentialblues.shtml>
+
+=head1 LICENSE
+
+This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
+
+See L<http://www.perl.com/perl/misc/Artistic.html>
 
 =cut
+
+package Archive::Any;
+use strict;
+use warnings;
+
+use vars qw($VERSION);
+$VERSION = 0.09;
+
+use Archive::Any::Plugin;
+use File::Spec::Functions qw( rel2abs splitdir );
+use File::MMagic;
+use MIME::Types qw(by_suffix);
+
+sub new {
+    my ( $class, $file, $type ) = @_;
+
+    $file = rel2abs($file);
+    return unless -f $file;
+
+    my %available;
+
+    my @plugins = Archive::Any::Plugin->findsubmod;
+    foreach my $plugin (@plugins) {
+        eval "require $plugin";
+        next if $@;
+
+        my @types = $plugin->can_handle();
+        foreach my $type ( @types ) {
+            next if exists( $available{$type} );
+            $available{$type} = $plugin;
+        }
+    }
+
+    my $mime_type;
+
+    if ($type) {
+        # The user forced the type.
+        ($mime_type) = by_suffix($type);
+        unless( $mime_type ) {
+            warn "No mime type found for type '$type'";
+            return;
+        }
+    } else {
+        # Autodetect the type.
+        $mime_type = File::MMagic->new()->checktype_filename($file);
+    }
+
+    my $handler = $available{$mime_type};
+    if( ! $handler ) {
+        warn "No handler available for type '$mime_type'";
+        return;
+    }
+
+    return bless {
+        file    => $file,
+        handler => $handler,
+    }, $class;
+}
+
+sub extract {
+    my $self = shift;
+    my $dir  = shift;
+
+    return defined($dir)
+      ? $self->{handler}->_extract( $self->{file}, $dir )
+      : $self->{handler}->_extract( $self->{file} );
+}
+
+sub files {
+    my $self = shift;
+    return $self->{handler}->files( $self->{file} );
+}
+
+sub is_impolite {
+    my $self = shift;
+
+    my @files       = $self->files;
+    my $first_file  = $files[0];
+    my ($first_dir) = splitdir($first_file);
+
+    return grep( !/^\Q$first_dir\E/, @files ) ? 1 : 0;
+}
+
+sub is_naughty {
+    my ($self) = shift;
+    return ( grep { m{^(?:/|(?:\./)*\.\./)} } $self->files ) ? 1 : 0;
+}
+
+#sub handler {
+#    my $self = shift;
+#    return $self->{handler};
+#}
 
 1;

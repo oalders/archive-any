@@ -1,19 +1,19 @@
 #!/usr/bin/perl -w
 
-use Test::More tests => 5;
+use Test::More tests => 7;
+use Test::Warn;
 
 use_ok 'Archive::Any';
 
-my $a = Archive::Any->new('t/Acme-POE-Knee-1.10.zip', 'zip');
-isa_ok( $a, 'Archive::Any' );
-is( $a->type, 'zip' );
+isa_ok( Archive::Any->new('t/naughty.tar', 'tar'), 'Archive::Any' );
 
-{
-    my $warning = '';
-    local $SIG{__WARN__} = sub {
-        $warning .= join '', @_;
-    };
-    ok( !Archive::Any->new('t/Acme-POE-Knee-1.10.zip', 'hominawoof') );
-    is( $warning, qq{Archive::Any can't handle hominawoof.\n} );
-}
+# Recognizes tar files with weird extensions
+isa_ok( Archive::Any->new('t/naughty.hominawoof'), 'Archive::Any' );
 
+warning_like {
+    ok( !Archive::Any->new('t/naughty.tar', 'hominawoof') );
+} qr{No mime type found for type 'hominawoof'}, "right warning, unknown type";
+
+warning_like {
+    ok( !Archive::Any->new('t/garbage.foo' ) );
+} qr{No handler available for type 'text/plain'}, "right warning, no type";
