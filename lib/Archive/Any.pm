@@ -3,12 +3,15 @@ package Archive::Any;
 use strict;
 use vars qw($VERSION @ISA);
 
-$VERSION = 0.01;
+$VERSION = 0.03;
 
 require Class::Virtually::Abstract;
 @ISA = qw(Class::Virtually::Abstract);
 
 __PACKAGE__->virtual_methods(qw(files extract type));
+
+
+use File::Spec::Functions qw(rel2abs);
 
 
 =head1 NAME
@@ -74,6 +77,8 @@ sub new {
         }
     }
 
+    $file = rel2abs( $file );
+
     eval qq{require $class} or die $@;
     my $self = $class->new($file);
 
@@ -112,7 +117,10 @@ directory rather than create it's own.
 sub is_impolite {
     my($self) = shift;
 
-    return grep { !m|/| } $self->files;
+    my @files = $self->files;
+    my $first_dir = shift @files;
+
+    return scalar grep !/^\Q$first_dir\E/, @files;
 }       
 
 =item B<is_naughty>
@@ -127,7 +135,7 @@ current directory.
 sub is_naughty {
     my($self) = shift;
 
-    return grep { m{^(?:/|\.\./)} } $self->files;
+    return scalar grep { m{^(?:/|\.\./)} } $self->files;
 }
 
 =back

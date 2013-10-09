@@ -3,7 +3,7 @@
 use Test::More 'no_plan';
 
 use Archive::Any;
-use File::Spec;
+use File::Spec::Functions qw(updir);
 
 my %tests = (
   't/Acme-POE-Knee-1.10.zip' => {
@@ -72,6 +72,11 @@ my %tests = (
 
 while( my($file, $expect) = each %tests ) {
     my $archive = Archive::Any->new($file);
+
+    # And now we chdir out from under it.  This causes serious problems
+    # if we're not careful to use absolute paths internally.
+    chdir('t');
+
     ok( defined $archive,               "new($file)" );
     ok( $archive->isa('Archive::Any'),  "  it's an object" );
 
@@ -90,4 +95,6 @@ while( my($file, $expect) = each %tests ) {
             -d $file ? rmdir $file : unlink $file;
         }
     }
+
+    chdir(updir);
 }

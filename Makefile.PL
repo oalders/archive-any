@@ -30,6 +30,7 @@ WriteMakefile(
                          Archive::Zip   => 0.11,
                          Cwd            => 0,
                          Class::Virtually::Abstract => 0.02,
+                         File::Spec::Functions => 0,
                          Test::More     => 0.11,
                        },
     'dist'          => { COMPRESS   => 'gzip -9',
