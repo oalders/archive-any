@@ -26,20 +26,22 @@ CHANGE_WARN
 WriteMakefile(
     NAME            => $PACKAGE,
     VERSION_FROM    => "lib/$PACKAGE_FILE.pm", # finds $VERSION
-    PREREQ_PM       => { Archive::Tar   => 0.22,
-                         Archive::Zip   => 1.07,
-                         Cwd            => 0,
-                         Module::Find   => 0.05,
-                         MIME::Types    => 1.16,
-                         File::MMagic   => 1.27,
-                         File::Spec::Functions => 0,
-                         Test::More     => 0.40,
-                         Test::Warn     => 0,
-                       },
-    'dist'          => { COMPRESS   => 'gzip -9',
-                         SUFFIX     => '.gz',
-                         DIST_DEFAULT   => 'all tardist',
-                       },
+    PREREQ_PM       => {
+	Archive::Tar   => 0.22,
+	Archive::Zip   => 1.07,
+	Cwd            => 0,
+	Module::Find   => 0.05,
+	MIME::Types    => 1.16,
+	File::MMagic   => 1.27,
+	File::Spec::Functions => 0,
+	Test::More     => 0.40,
+	Test::Warn     => 0,
+    },
+    'dist'          => {
+	COMPRESS   => 'gzip -9',
+	SUFFIX     => '.gz',
+	DIST_DEFAULT   => 'all tardist',
+    },
 );
 
 

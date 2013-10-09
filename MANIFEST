@@ -19,6 +19,5 @@ t/not_a_zip.zip
 t/type.t
 t/pod.t
 t/pod-coverage.t
-t/perl-critic.t
 Build.PL
 README

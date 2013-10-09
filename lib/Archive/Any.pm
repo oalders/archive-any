@@ -133,7 +133,7 @@ use strict;
 use warnings;
 
 use vars qw($VERSION);
-$VERSION = 0.093;
+$VERSION = 0.0932;
 
 use Archive::Any::Plugin;
 use File::Spec::Functions qw( rel2abs splitdir );
@@ -218,7 +218,7 @@ sub is_naughty {
 
 sub mime_type {
     my $self = shift;
-    return $self->{mime_type};
+    return $self->{type};
 }
 
 #

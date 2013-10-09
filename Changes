@@ -1,3 +1,6 @@
+0.931
+    - Resisted the urge to make large sweeping changes.  Fixed a problem with
+      the tests and called it good.
 0.93
     - DESTROY ALL TABS! [schwern]
     - The example for Plugin->can_handle showed the wrong return value.

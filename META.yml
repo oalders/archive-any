@@ -1,8 +1,8 @@
 --- #YAML:1.0
 name:                Archive-Any
-version:             0.093
+version:             0.0932
 abstract:            ~
-license:             unknown
+license:             perl
 generated_by:        ExtUtils::MakeMaker version 6.30_03
 author:              ~
 distribution_type:   module
