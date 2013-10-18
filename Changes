@@ -1,4 +1,6 @@
 {{$NEXT}}
+
+0.0940 2013-10-18 01:35:34 America/Toronto
     - Adds x-bzip2 as per PERLER's patch in RT#67738.
 
 0.931 2008-04-23
