@@ -1,4 +1,5 @@
 {{$NEXT}}
+    - Adds x-bzip2 as per PERLER's patch in RT#67738.
 
 0.931 2008-04-23
     - Resisted the urge to make large sweeping changes.  Fixed a problem with

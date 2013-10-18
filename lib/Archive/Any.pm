@@ -106,18 +106,18 @@ sub type {
 
 =head1 SYNOPSIS
 
-  use Archive::Any;
+    use Archive::Any;
 
-  my $archive = Archive::Any->new($archive_file);
+    my $archive = Archive::Any->new( $archive_file );
 
-  my @files = $archive->files;
+    my @files = $archive->files;
 
-  $archive->extract;
+    $archive->extract;
 
-  my $type = $archive->type;
+    my $type = $archive->type;
 
-  $archive->is_impolite;
-  $archive->is_naughty;
+    $archive->is_impolite;
+    $archive->is_naughty;
 
 =head1 DESCRIPTION
 
@@ -127,39 +127,39 @@ This module is a single interface for manipulating different archive formats.  T
 
 =item B<new>
 
-  my $archive = Archive::Any->new($archive_file);
-  my $archive = Archive::Any->new($archive_file, $type);
+    my $archive = Archive::Any->new( $archive_file );
+    my $archive = Archive::Any->new( $archive_file, $type );
 
-$type is optional.  It lets you force the file type in-case Archive::Any can't figure it out.
+$type is optional.  It lets you force the file type in case Archive::Any can't figure it out.
 
 =item B<extract>
 
-  $archive->extract;
-  $archive->extract($directory);
+    $archive->extract;
+    $archive->extract( $directory );
 
 Extracts the files in the archive to the given $directory.  If no $directory is given, it will go into the current working directory.
 
 =item B<files>
 
-  my @file = $archive->files;
+    my @file = $archive->files;
 
 A list of files in the archive.
 
 =item B<mime_type>
 
- my $mime_type = $archive->mime_type();
+    my $mime_type = $archive->mime_type();
 
 Returns the mime type of the archive.
 
 =item B<is_impolite>
 
-  my $is_impolite = $archive->is_impolite;
+    my $is_impolite = $archive->is_impolite;
 
 Checks to see if this archive is going to unpack into the current directory rather than create its own.
 
 =item B<is_naughty>
 
-  my $is_naughty = $archive->is_naughty;
+    my $is_naughty = $archive->is_naughty;
 
 Checks to see if this archive is going to unpack B<outside> the current directory.
 
@@ -171,7 +171,7 @@ Checks to see if this archive is going to unpack B<outside> the current director
 
 =item B<type>
 
-  my $type = $archive->type;
+    my $type = $archive->type;
 
 Returns the type of archive.  This method is provided for backwards compatibility in the Tar and Zip plugins and will be going away B<soon> in favor of C<mime_type>.
 
@@ -181,14 +181,6 @@ Returns the type of archive.  This method is provided for backwards compatibilit
 
 For detailed information on writing plugins to work with Archive::Any, please see the pod documentation for L<Archive::Any::Plugin>.
 
-=head1 AUTHOR
-
-Clint Moore E<lt>cmoore@cpan.orgE<gt>
-
-=head1 AUTHOR EMERITUS
-
-Michael G Schwern
-
 =head1 SEE ALSO
 
 Archive::Any::Plugin
@@ -197,7 +189,7 @@ Archive::Any::Plugin
 
 You can find documentation for this module with the perldoc command.
 
- perldoc Archive::Any
+    perldoc Archive::Any
 
 You can also look for information at:
 
