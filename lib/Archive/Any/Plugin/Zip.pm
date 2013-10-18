@@ -6,22 +6,6 @@ use base qw(Archive::Any::Plugin);
 
 use Archive::Zip qw(:ERROR_CODES);
 
-=head1 NAME
-
-Archive::Any::Plugin::Zip - Archive::Any wrapper around Archive::Zip
-
-=head1 SYNOPSIS
-
-B<DO NOT USE THIS MODULE DIRECTLY>
-
-Use Archive::Any instead.
-
-=head1 DESCRIPTION
-
-Wrapper around Archive::Zip for Archive::Any.
-
-=cut
-
 sub can_handle {
     return(
            'application/x-zip',
@@ -52,11 +36,18 @@ sub type {
     return 'zip';
 }
 
+1;
 
-=head1 SEE ALSO
+# ABSTRACT: Archive::Any wrapper around Archive::Zip
 
-Archive::Any, Archive::Zip
+=head1 SYNOPSIS
+
+B<DO NOT USE THIS MODULE DIRECTLY>
+
+Use L<Archive::Any> instead.
+
+=head1 DESCRIPTION
+
+Wrapper around L<Archive::Zip> for L<Archive::Any>.
 
 =cut
-
-1;

@@ -5,26 +5,8 @@ use strict;
 require Archive::Any;
 @ISA = qw(Archive::Any);
 
-
 use Archive::Tar;
 use Cwd;
-
-
-=head1 NAME
-
-Archive::Any::Tar - Archive::Any wrapper around Archive::Tar
-
-=head1 SYNOPSIS
-
-B<DO NOT USE THIS MODULE DIRECTLY>
-
-Use Archive::Any instead.
-
-=head1 DESCRIPTION
-
-Wrapper around Archive::Tar for Archive::Any.
-
-=cut
 
 sub new {
     my($class, $file) = @_;
@@ -70,11 +52,22 @@ sub type {
     return 'tar';
 }
 
+1;
+
+# ABSTRACT: Archive::Any wrapper around Archive::Tar
+
+=head1 SYNOPSIS
+
+B<DO NOT USE THIS MODULE DIRECTLY>
+
+Use L<Archive::Any> instead.
+
+=head1 DESCRIPTION
+
+Wrapper around L<Archive::Tar> for L<Archive::Any>.
 
 =head1 SEE ALSO
 
-Archive::Any, Archive::Tar
+L<Archive::Any>, L<Archive::Tar>
 
 =cut
-
-1;

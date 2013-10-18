@@ -1,19 +1,10 @@
 package Archive::Any::Plugin::Tar;
+
 use strict;
 use base 'Archive::Any::Plugin';
 
 use Archive::Tar;
 use Cwd;
-
-=head1 NAME
-
-Archive::Any::Plugin::Tar - Archive::Any wrapper around Archive::Tar
-
-=head1 SYNOPSIS
-
-Do not use this module directly.  Instead, use Archive::Any.
-
-=cut
 
 sub can_handle {
     return(
@@ -42,10 +33,18 @@ sub type {
     return 'tar';
 }
 
-=head1 SEE ALSO
+1;
 
-Archive::Any, Archive::Tar
+# ABSTRACT: Archive::Any wrapper around Archive::Tar
+
+=head1 SYNOPSIS
+
+Do not use this module directly.  Instead, use L<Archive::Any>.
 
 =cut
 
-1;
+=head1 SEE ALSO
+
+L<Archive::Any>, L<Archive::Tar>
+
+=cut

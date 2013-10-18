@@ -5,26 +5,8 @@ use strict;
 require Archive::Any;
 @ISA = qw(Archive::Any);
 
-
 use Archive::Zip qw(:ERROR_CODES);
 use Cwd;
-
-
-=head1 NAME
-
-Archive::Any::Zip - Archive::Any wrapper around Archive::Zip
-
-=head1 SYNOPSIS
-
-B<DO NOT USE THIS MODULE DIRECTLY>
-
-Use Archive::Any instead.
-
-=head1 DESCRIPTION
-
-Wrapper around Archive::Zip for Archive::Any.
-
-=cut
 
 sub new {
     my($class, $file) = @_;
@@ -71,10 +53,17 @@ sub type {
     return 'zip';
 }
 
+# ABSTRACT: Archive::Any wrapper around Archive::Zip
 
-=head1 SEE ALSO
+=head1 SYNOPSIS
 
-Archive::Any, Archive::Zip
+B<DO NOT USE THIS MODULE DIRECTLY>
+
+Use L<Archive::Any> instead.
+
+=head1 DESCRIPTION
+
+Wrapper around L<Archive::Zip> for L<Archive::Any>.
 
 =cut
 

@@ -119,7 +119,8 @@ sub type {
 
 =head1 DESCRIPTION
 
-This module is a single interface for manipulating different archive formats.  Tarballs, zip files, etc.
+This module is a single interface for manipulating different archive formats.
+Tarballs, zip files, etc.
 
 =over 4
 
@@ -128,14 +129,16 @@ This module is a single interface for manipulating different archive formats.  T
     my $archive = Archive::Any->new( $archive_file );
     my $archive = Archive::Any->new( $archive_file, $type );
 
-$type is optional.  It lets you force the file type in case Archive::Any can't figure it out.
+$type is optional.  It lets you force the file type in case Archive::Any can't
+figure it out.
 
 =item B<extract>
 
     $archive->extract;
     $archive->extract( $directory );
 
-Extracts the files in the archive to the given $directory.  If no $directory is given, it will go into the current working directory.
+Extracts the files in the archive to the given $directory.  If no $directory is
+given, it will go into the current working directory.
 
 =item B<files>
 
@@ -153,13 +156,15 @@ Returns the mime type of the archive.
 
     my $is_impolite = $archive->is_impolite;
 
-Checks to see if this archive is going to unpack into the current directory rather than create its own.
+Checks to see if this archive is going to unpack into the current directory
+rather than create its own.
 
 =item B<is_naughty>
 
     my $is_naughty = $archive->is_naughty;
 
-Checks to see if this archive is going to unpack B<outside> the current directory.
+Checks to see if this archive is going to unpack B<outside> the current
+directory.
 
 =back
 
@@ -171,13 +176,16 @@ Checks to see if this archive is going to unpack B<outside> the current director
 
     my $type = $archive->type;
 
-Returns the type of archive.  This method is provided for backwards compatibility in the Tar and Zip plugins and will be going away B<soon> in favor of C<mime_type>.
+Returns the type of archive.  This method is provided for backwards
+compatibility in the Tar and Zip plugins and will be going away B<soon> in
+favor of C<mime_type>.
 
 =back
 
 =head1 PLUGINS
 
-For detailed information on writing plugins to work with Archive::Any, please see the pod documentation for L<Archive::Any::Plugin>.
+For detailed information on writing plugins to work with Archive::Any, please
+see the pod documentation for L<Archive::Any::Plugin>.
 
 =head1 SEE ALSO
 
