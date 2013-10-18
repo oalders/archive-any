@@ -52,16 +52,12 @@ This method should extract the contents of $file to the current directory.  L<Ar
 
  sub extract {
     my ( $self, $file ) = @_;
- 
+
     my $t = Archive::Tar->new( $file );
     return $t->extract;
  }
 
 =back
-
-=head1 AUTHOR
-
-Clint Moore E<lt>cmoore@cpan.orgE<gt>
 
 =head1 SEE ALSO
 

@@ -71,10 +71,6 @@ sub type {
 }
 
 
-=head1 AUTHOR
-
-Michael G Schwern E<lt>schwern@pobox.comE<gt>
-
 =head1 SEE ALSO
 
 Archive::Any, Archive::Tar
