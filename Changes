@@ -1,16 +1,19 @@
-0.931
+{{$NEXT}}
+
+0.931 2008-04-23
     - Resisted the urge to make large sweeping changes.  Fixed a problem with
       the tests and called it good.
-0.93
+
+0.93  2008-04-23
     - DESTROY ALL TABS! [schwern]
     - The example for Plugin->can_handle showed the wrong return value.
       [schwern]
 
-0.92  Sat Aug 26 17:09:21 PDT 2006
+0.92  2006-08-26
     - Added pod tests and a README for kwalitee.  Not exactly a critical
       update!
 
-0.91  Mon Aug 14 10:35:24 PDT 2006
+0.91  2006-08-14
     - type() is there now.  I'm not in the business of breaking other
       people's scripts.
     - Fixed several issues with the pod.
@@ -18,36 +21,36 @@
       actually has useful information.
     - Added a test for the backwardsness.
 
-0.09  Sun Aug 13 23:25:13 PDT 2006
+0.09  2006-08-13
     - Complete rework of the module.
     - Supports simple plugins for adding support for archive formats.
 
-0.06  Wed Oct 29 14:39:15 PST 2003
+0.06  2003-10-29
     - Updating to Archive::Zip 1.07 which fixes extractTree().
     * Forgot to include *.tar in the "what is a tarball" logic!
       [Thanks Kevin Pease]
     - Minor doc improvements.
 
-0.05  Mon Oct 20 04:28:31 PDT 2003
+0.05  2003-10-20
     * Archive::Any->new($file, $type) wasn't working (thanks to Simon Wistow
       for catching this).
 
-0.04  Mon Oct 20 01:53:27 PDT 2003
+0.04  2003-10-20
     * Removing unzip binary hack around Archive::Zip->extractMember bug.
     - Working around new extractTree() bug which can cause directories to
       be unzipped with permissions set to 0000.
     - Fixing is_impolite() and is_naughty() so they return true or false
       instead of the scalar result of a grep.
     - Failing gracefully should Archive::Tar/Zip->new() fail.
-    * Fixing list_archive() and extract_archive() misuse so we work with 
+    * Fixing list_archive() and extract_archive() misuse so we work with
       modern Archive::Tar.
     - Class::Virtually::Abstract now has a version # on CPAN.
     * is_naughty() would screw up if the first file in the archive wasn't
       a lone directory
 
-0.03  Mon Sep  3 22:18:28 EDT 2001
+0.03  2001-09-03
     * It is now safe to chdir() after creating an Archive::Any object
 
-0.01  Sun Aug 26 02:09:51 EDT 2001
+0.01  2001-08-26
     * First working version
     * Archive::Zip is broken.  Using unzip binary to extract.
