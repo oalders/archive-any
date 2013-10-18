@@ -102,9 +102,7 @@ sub type {
 
 1;
 
-=head1 NAME
-
-Archive::Any - Single interface to deal with file archives.
+# ABSTRACT: Single interface to deal with file archives.
 
 =head1 SYNOPSIS
 
@@ -205,29 +203,15 @@ You can also look for information at:
 
 =over 4
 
-=item * AnnoCPAN: Annotated CPAN documentation
+=item * MetaCPAN
 
-L<http://annocpan.org/dist/Archive-Any>
+L<https://metacpan.org/module/Archive::Any>
 
-=item * CPAN Ratings
+=item * Issue tracker
 
-L<http://cpanratings.perl.org/d/Archive-Any>
-
-=item * RT: CPAN's request tracker
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Archive-Any>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/Archive-Any>
+L<https://github.com/oalders/archive-any/issues>
 
 =back
-
-=head1 LICENSE
-
-This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
-
-See L<http://www.perl.com/perl/misc/Artistic.html>
 
 =cut
 
