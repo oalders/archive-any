@@ -1,3 +1,106 @@
+package Archive::Any;
+use strict;
+use warnings;
+
+use vars qw($VERSION);
+$VERSION = 0.0932;
+
+use Archive::Any::Plugin;
+use File::Spec::Functions qw( rel2abs splitdir );
+use File::MMagic;
+use MIME::Types qw(by_suffix);
+
+sub new {
+    my ( $class, $file, $type ) = @_;
+
+    $file = rel2abs($file);
+    return unless -f $file;
+
+    my %available;
+
+    my @plugins = Archive::Any::Plugin->findsubmod;
+    foreach my $plugin (@plugins) {
+        eval "require $plugin";
+        next if $@;
+
+        my @types = $plugin->can_handle();
+        foreach my $type ( @types ) {
+            next if exists( $available{$type} );
+            $available{$type} = $plugin;
+        }
+    }
+
+    my $mime_type;
+
+    if ($type) {
+        # The user forced the type.
+        ($mime_type) = by_suffix($type);
+        unless( $mime_type ) {
+            warn "No mime type found for type '$type'";
+            return;
+        }
+    } else {
+        # Autodetect the type.
+        $mime_type = File::MMagic->new()->checktype_filename($file);
+    }
+
+    my $handler = $available{$mime_type};
+    if( ! $handler ) {
+        warn "No handler available for type '$mime_type'";
+        return;
+    }
+
+    return bless {
+        file    => $file,
+        handler => $handler,
+        type => $mime_type,
+    }, $class;
+}
+
+sub extract {
+    my $self = shift;
+    my $dir  = shift;
+
+    return defined($dir)
+      ? $self->{handler}->_extract( $self->{file}, $dir )
+      : $self->{handler}->_extract( $self->{file} );
+}
+
+sub files {
+    my $self = shift;
+    return $self->{handler}->files( $self->{file} );
+}
+
+sub is_impolite {
+    my $self = shift;
+
+    my @files       = $self->files;
+    my $first_file  = $files[0];
+    my ($first_dir) = splitdir($first_file);
+
+    return grep( !/^\Q$first_dir\E/, @files ) ? 1 : 0;
+}
+
+sub is_naughty {
+    my ($self) = shift;
+    return ( grep { m{^(?:/|(?:\./)*\.\./)} } $self->files ) ? 1 : 0;
+}
+
+sub mime_type {
+    my $self = shift;
+    return $self->{type};
+}
+
+#
+# This is not really here.  You are not seeing this.
+#
+sub type {
+    my $self = shift;
+    return $self->{handler}->type();
+}
+# End of what you are not seeing.
+
+1;
 
 =head1 NAME
 
@@ -128,106 +231,3 @@ See L<http://www.perl.com/perl/misc/Artistic.html>
 
 =cut
 
-package Archive::Any;
-use strict;
-use warnings;
-
-use vars qw($VERSION);
-$VERSION = 0.0932;
-
-use Archive::Any::Plugin;
-use File::Spec::Functions qw( rel2abs splitdir );
-use File::MMagic;
-use MIME::Types qw(by_suffix);
-
-sub new {
-    my ( $class, $file, $type ) = @_;
-
-    $file = rel2abs($file);
-    return unless -f $file;
-
-    my %available;
-
-    my @plugins = Archive::Any::Plugin->findsubmod;
-    foreach my $plugin (@plugins) {
-        eval "require $plugin";
-        next if $@;
-
-        my @types = $plugin->can_handle();
-        foreach my $type ( @types ) {
-            next if exists( $available{$type} );
-            $available{$type} = $plugin;
-        }
-    }
-
-    my $mime_type;
-
-    if ($type) {
-        # The user forced the type.
-        ($mime_type) = by_suffix($type);
-        unless( $mime_type ) {
-            warn "No mime type found for type '$type'";
-            return;
-        }
-    } else {
-        # Autodetect the type.
-        $mime_type = File::MMagic->new()->checktype_filename($file);
-    }
-
-    my $handler = $available{$mime_type};
-    if( ! $handler ) {
-        warn "No handler available for type '$mime_type'";
-        return;
-    }
-
-    return bless {
-        file    => $file,
-        handler => $handler,
-        type => $mime_type,
-    }, $class;
-}
-
-sub extract {
-    my $self = shift;
-    my $dir  = shift;
-
-    return defined($dir)
-      ? $self->{handler}->_extract( $self->{file}, $dir )
-      : $self->{handler}->_extract( $self->{file} );
-}
-
-sub files {
-    my $self = shift;
-    return $self->{handler}->files( $self->{file} );
-}
-
-sub is_impolite {
-    my $self = shift;
-
-    my @files       = $self->files;
-    my $first_file  = $files[0];
-    my ($first_dir) = splitdir($first_file);
-
-    return grep( !/^\Q$first_dir\E/, @files ) ? 1 : 0;
-}
-
-sub is_naughty {
-    my ($self) = shift;
-    return ( grep { m{^(?:/|(?:\./)*\.\./)} } $self->files ) ? 1 : 0;
-}
-
-sub mime_type {
-    my $self = shift;
-    return $self->{type};
-}
-
-#
-# This is not really here.  You are not seeing this.
-#
-sub type {
-    my $self = shift;
-    return $self->{handler}->type();
-}
-# End of what you are not seeing.
-
-1;
