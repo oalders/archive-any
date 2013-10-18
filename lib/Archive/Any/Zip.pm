@@ -1,8 +1,6 @@
 package Archive::Any::Zip;
 
 use strict;
-use vars qw($VERSION @ISA);
-$VERSION = 0.03;
 
 require Archive::Any;
 @ISA = qw(Archive::Any);

@@ -1,8 +1,6 @@
 package Archive::Any::Plugin::Zip;
 
 use strict;
-use vars qw($VERSION);
-$VERSION = 0.03;
 
 use base qw(Archive::Any::Plugin);
 

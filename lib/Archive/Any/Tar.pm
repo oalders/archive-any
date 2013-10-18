@@ -1,8 +1,6 @@
 package Archive::Any::Tar;
 
 use strict;
-use vars qw($VERSION @ISA);
-$VERSION = 0.02;
 
 require Archive::Any;
 @ISA = qw(Archive::Any);

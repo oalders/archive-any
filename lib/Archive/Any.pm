@@ -1,9 +1,7 @@
 package Archive::Any;
+
 use strict;
 use warnings;
-
-use vars qw($VERSION);
-$VERSION = 0.0932;
 
 use Archive::Any::Plugin;
 use File::Spec::Functions qw( rel2abs splitdir );
