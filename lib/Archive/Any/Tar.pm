@@ -9,44 +9,41 @@ use Archive::Tar;
 use Cwd;
 
 sub new {
-    my($class, $file) = @_;
+    my ( $class, $file ) = @_;
 
     my $self = bless {}, $class;
 
-    $self->{handler} = Archive::Tar->new($file);
+    $self->{handler} = Archive::Tar->new( $file );
     return unless $self->{handler};
 
-    $self->{file}    = $file;
+    $self->{file} = $file;
 
     return $self;
 }
 
-
 sub files {
-    my($self) = shift;
+    my ( $self ) = shift;
 
     $self->{handler}->list_files;
 }
 
-
 sub extract {
-    my($self, $dir) = @_;
+    my ( $self, $dir ) = @_;
 
     my $orig_dir;
-    if( $dir ) {
+    if ( $dir ) {
         $orig_dir = getcwd;
         chdir $dir;
     }
 
     my $success = $self->{handler}->extract;
 
-    if( $dir) {
+    if ( $dir ) {
         chdir $orig_dir;
     }
 
     return $success;
 }
-
 
 sub type {
     return 'tar';

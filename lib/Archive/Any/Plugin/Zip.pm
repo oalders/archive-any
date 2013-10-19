@@ -7,23 +7,18 @@ use base qw(Archive::Any::Plugin);
 use Archive::Zip qw(:ERROR_CODES);
 
 sub can_handle {
-    return(
-           'application/x-zip',
-           'application/x-jar',
-           'application/zip',
-          );
+    return ( 'application/x-zip', 'application/x-jar', 'application/zip', );
 }
 
 sub files {
-    my( $self, $file ) = @_;
+    my ( $self, $file ) = @_;
 
     my $z = Archive::Zip->new( $file );
     return $z->memberNames;
 }
 
-
 sub extract {
-    my($self, $file) = @_;
+    my ( $self, $file ) = @_;
 
     my $z = Archive::Zip->new( $file );
     $z->extractTree;

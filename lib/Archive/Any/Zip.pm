@@ -9,45 +9,42 @@ use Archive::Zip qw(:ERROR_CODES);
 use Cwd;
 
 sub new {
-    my($class, $file) = @_;
+    my ( $class, $file ) = @_;
 
     my $self = bless {}, $class;
 
-    Archive::Zip::setErrorHandler(sub {});
-    $self->{handler} = Archive::Zip->new($file);
+    Archive::Zip::setErrorHandler( sub { } );
+    $self->{handler} = Archive::Zip->new( $file );
     return unless $self->{handler};
 
-    $self->{file}    = $file;
+    $self->{file} = $file;
 
     return $self;
 }
 
-
 sub files {
-    my($self) = shift;
+    my ( $self ) = shift;
 
     $self->{handler}->memberNames;
 }
 
-
 sub extract {
-    my($self, $dir) = @_;
+    my ( $self, $dir ) = @_;
 
     my $orig_dir;
-    if( $dir ) {
+    if ( $dir ) {
         $orig_dir = getcwd;
         chdir $dir;
     }
 
     $self->{handler}->extractTree;
 
-    if( $dir) {
+    if ( $dir ) {
         chdir $orig_dir;
     }
 
     return 1;
 }
-
 
 sub type {
     return 'zip';

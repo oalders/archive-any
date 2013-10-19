@@ -11,13 +11,13 @@ use MIME::Types qw(by_suffix);
 sub new {
     my ( $class, $file, $type ) = @_;
 
-    $file = rel2abs($file);
+    $file = rel2abs( $file );
     return unless -f $file;
 
     my %available;
 
     my @plugins = Archive::Any::Plugin->findsubmod;
-    foreach my $plugin (@plugins) {
+    foreach my $plugin ( @plugins ) {
         eval "require $plugin";
         next if $@;
 
@@ -30,20 +30,22 @@ sub new {
 
     my $mime_type;
 
-    if ($type) {
+    if ( $type ) {
+
         # The user forced the type.
-        ($mime_type) = by_suffix($type);
-        unless( $mime_type ) {
+        ( $mime_type ) = by_suffix( $type );
+        unless ( $mime_type ) {
             warn "No mime type found for type '$type'";
             return;
         }
-    } else {
+    }
+    else {
         # Autodetect the type.
-        $mime_type = File::MMagic->new()->checktype_filename($file);
+        $mime_type = File::MMagic->new()->checktype_filename( $file );
     }
 
     my $handler = $available{$mime_type};
-    if( ! $handler ) {
+    if ( !$handler ) {
         warn "No handler available for type '$mime_type'";
         return;
     }
@@ -51,7 +53,7 @@ sub new {
     return bless {
         file    => $file,
         handler => $handler,
-        type => $mime_type,
+        type    => $mime_type,
     }, $class;
 }
 
@@ -59,9 +61,9 @@ sub extract {
     my $self = shift;
     my $dir  = shift;
 
-    return defined($dir)
-      ? $self->{handler}->_extract( $self->{file}, $dir )
-      : $self->{handler}->_extract( $self->{file} );
+    return defined( $dir )
+        ? $self->{handler}->_extract( $self->{file}, $dir )
+        : $self->{handler}->_extract( $self->{file} );
 }
 
 sub files {
@@ -72,16 +74,16 @@ sub files {
 sub is_impolite {
     my $self = shift;
 
-    my @files       = $self->files;
-    my $first_file  = $files[0];
-    my ($first_dir) = splitdir($first_file);
+    my @files         = $self->files;
+    my $first_file    = $files[0];
+    my ( $first_dir ) = splitdir( $first_file );
 
     return grep( !/^\Q$first_dir\E/, @files ) ? 1 : 0;
 }
 
 sub is_naughty {
-    my ($self) = shift;
-    return ( grep { m{^(?:/|(?:\./)*\.\./)} } $self->files ) ? 1 : 0;
+    my ( $self ) = shift;
+    return ( grep {m{^(?:/|(?:\./)*\.\./)}} $self->files ) ? 1 : 0;
 }
 
 sub mime_type {
@@ -96,6 +98,7 @@ sub type {
     my $self = shift;
     return $self->{handler}->type();
 }
+
 # End of what you are not seeing.
 
 1;

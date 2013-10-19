@@ -7,17 +7,17 @@ use Module::Find;
 use Cwd;
 
 sub _extract {
-    my($self, $file, $dir) = @_;
+    my ( $self, $file, $dir ) = @_;
 
     my $orig_dir;
-    if( defined $dir ) {
+    if ( defined $dir ) {
         $orig_dir = getcwd;
         chdir $dir;
     }
 
     my $success = $self->extract( $file );
 
-    if( defined $dir) {
+    if ( defined $dir ) {
         chdir $orig_dir;
     }
 
