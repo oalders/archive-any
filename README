@@ -2,7 +2,7 @@ NAME
     Archive::Any - Single interface to deal with file archives.
 
 VERSION
-    version 0.0940
+    version 0.0941
 
 SYNOPSIS
         use Archive::Any;
