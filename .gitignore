@@ -1,0 +1,8 @@
+*.swp
+.build
+.tidyall.d
+/blib/
+Archive-Any-*
+Build
+_build/
+perltidy.LOG
