@@ -1,5 +1,6 @@
 {{$NEXT}}
     - Fixes version number in lib/Archive/Any.pm
+    - Previous release had broken permissions.
 
 0.0940 2013-10-18 01:35:34 America/Toronto
     - Adds x-bzip2 as per PERLER's patch in RT#67738.
