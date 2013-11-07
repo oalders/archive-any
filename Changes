@@ -1,4 +1,6 @@
 {{$NEXT}}
+
+0.0941 2013-11-06 21:38:55 America/Toronto
     - Fixes version number in lib/Archive/Any.pm
     - Previous release had broken permissions.
 
