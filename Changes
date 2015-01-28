@@ -1,4 +1,6 @@
 {{$NEXT}}
+    - Replaces contents of archives in test folder with random noise in order
+      to avoid any licensing issues. (Philippe Bruhat (BooK))
 
 0.0941 2013-11-06 21:38:55 America/Toronto
     - Fixes version number in lib/Archive/Any.pm
