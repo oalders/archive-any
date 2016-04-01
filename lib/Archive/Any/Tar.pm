@@ -3,7 +3,7 @@ package Archive::Any::Tar;
 use strict;
 
 require Archive::Any;
-@ISA = qw(Archive::Any);
+use base 'Archive::Any';
 
 use Archive::Tar;
 use Cwd;
