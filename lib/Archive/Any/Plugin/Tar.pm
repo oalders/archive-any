@@ -1,6 +1,7 @@
 package Archive::Any::Plugin::Tar;
 
 use strict;
+use warnings;
 use base 'Archive::Any::Plugin';
 
 use Archive::Tar;

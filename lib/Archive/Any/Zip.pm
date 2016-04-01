@@ -1,7 +1,7 @@
 package Archive::Any::Zip;
 
 use strict;
-
+use warnings;
 require Archive::Any;
 @ISA = qw(Archive::Any);
 

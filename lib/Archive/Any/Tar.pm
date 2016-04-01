@@ -1,7 +1,7 @@
 package Archive::Any::Tar;
 
 use strict;
-
+use warnings;
 require Archive::Any;
 use base 'Archive::Any';
 

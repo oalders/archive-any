@@ -1,7 +1,7 @@
 package Archive::Any::Plugin::Zip;
 
 use strict;
-
+use warnings;
 use base qw(Archive::Any::Plugin);
 
 use Archive::Zip qw(:ERROR_CODES);
