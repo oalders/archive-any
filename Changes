@@ -1,4 +1,6 @@
 {{$NEXT}}
+    - Use 'base' rather than @ISA (@real-dam and Jenish G)
+    - Use warnings in more modules (Jenish G)
 
 0.0942 2015-01-28 17:07:43 America/Toronto
     - Replaces contents of archives in test folder with random noise in order
