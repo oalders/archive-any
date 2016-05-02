@@ -1,4 +1,5 @@
 {{$NEXT}}
+    - Use 'base' rather than @ISA in Zip.pm
 
 0.0944 2016-04-01 18:30:02 America/Toronto
     - Use warnings in more modules (Jenish G)

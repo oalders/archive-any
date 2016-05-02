@@ -2,8 +2,8 @@ package Archive::Any::Zip;
 
 use strict;
 use warnings;
-require Archive::Any;
-@ISA = qw(Archive::Any);
+
+use base 'Archive::Any';
 
 use Archive::Zip qw(:ERROR_CODES);
 use Cwd;
