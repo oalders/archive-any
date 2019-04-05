@@ -1,5 +1,5 @@
 package Archive::Any::Plugin::Zip;
-
+our $VERSION = '0.0947';
 use strict;
 use warnings;
 use base qw(Archive::Any::Plugin);

@@ -1,5 +1,5 @@
 package Archive::Any::Plugin::Tar;
-
+our $VERSION = '0.0947';
 use strict;
 use warnings;
 use base 'Archive::Any::Plugin';

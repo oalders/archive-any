@@ -1,5 +1,5 @@
 package Archive::Any::Plugin;
-
+our $VERSION = '0.0947';
 use strict;
 use warnings;
 

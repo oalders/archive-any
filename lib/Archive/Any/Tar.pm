@@ -1,5 +1,5 @@
 package Archive::Any::Tar;
-
+our $VERSION = '0.0947';
 use strict;
 use warnings;
 require Archive::Any;
