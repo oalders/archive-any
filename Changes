@@ -1,4 +1,4 @@
-{{$NEXT}}
+0.0946    2019-04-05 20:11:47Z
     - Added copyright holder/year meta to dist.ini. (GH#6) (Mohammad S Anwar)
     - Auto generate META.yml using the plugin [MetaYAML]. (GH#8) (Mohammad S
       Anwar)
