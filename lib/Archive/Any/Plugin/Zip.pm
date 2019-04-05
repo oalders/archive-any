@@ -13,14 +13,14 @@ sub can_handle {
 sub files {
     my ( $self, $file ) = @_;
 
-    my $z = Archive::Zip->new( $file );
+    my $z = Archive::Zip->new($file);
     return $z->memberNames;
 }
 
 sub extract {
     my ( $self, $file ) = @_;
 
-    my $z = Archive::Zip->new( $file );
+    my $z = Archive::Zip->new($file);
     $z->extractTree;
 
     return 1;

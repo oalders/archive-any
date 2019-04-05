@@ -14,7 +14,7 @@ sub new {
     my $self = bless {}, $class;
 
     Archive::Zip::setErrorHandler( sub { } );
-    $self->{handler} = Archive::Zip->new( $file );
+    $self->{handler} = Archive::Zip->new($file);
     return unless $self->{handler};
 
     $self->{file} = $file;
@@ -23,7 +23,7 @@ sub new {
 }
 
 sub files {
-    my ( $self ) = shift;
+    my ($self) = shift;
 
     $self->{handler}->memberNames;
 }
@@ -32,14 +32,14 @@ sub extract {
     my ( $self, $dir ) = @_;
 
     my $orig_dir;
-    if ( $dir ) {
+    if ($dir) {
         $orig_dir = getcwd;
         chdir $dir;
     }
 
     $self->{handler}->extractTree;
 
-    if ( $dir ) {
+    if ($dir) {
         chdir $orig_dir;
     }
 
@@ -50,7 +50,9 @@ sub type {
     return 'zip';
 }
 
-# ABSTRACT: Archive::Any wrapper around Archive::Zip
+__END__
+
+=pod
 
 =head1 SYNOPSIS
 
@@ -65,3 +67,5 @@ Wrapper around L<Archive::Zip> for L<Archive::Any>.
 =cut
 
 1;
+
+# ABSTRACT: Archive::Any wrapper around Archive::Zip

@@ -16,14 +16,14 @@ sub can_handle {
 
 sub files {
     my ( $self, $file ) = @_;
-    my $t = Archive::Tar->new( $file );
+    my $t = Archive::Tar->new($file);
     return $t->list_files;
 }
 
 sub extract {
     my ( $self, $file ) = @_;
 
-    my $t = Archive::Tar->new( $file );
+    my $t = Archive::Tar->new($file);
     return $t->extract;
 }
 
