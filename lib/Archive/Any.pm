@@ -3,6 +3,8 @@ package Archive::Any;
 use strict;
 use warnings;
 
+our $VERSION = '0.0946';
+
 use Archive::Any::Plugin;
 use File::Spec::Functions qw( rel2abs splitdir );
 use File::MMagic;
