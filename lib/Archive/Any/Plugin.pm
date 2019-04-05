@@ -15,7 +15,7 @@ sub _extract {
         chdir $dir;
     }
 
-    $self->extract( $file );
+    $self->extract($file);
 
     if ( defined $dir ) {
         chdir $orig_dir;
