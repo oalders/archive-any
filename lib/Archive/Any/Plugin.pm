@@ -15,13 +15,16 @@ sub _extract {
         chdir $dir;
     }
 
-    $self->extract($file);
+    my $result = eval { $self->extract($file); };
+    my $error = $@;
 
     if ( defined $dir ) {
         chdir $orig_dir;
     }
 
-    return 1;
+    die $error if $error;
+
+    return $result;
 }
 
 1;
